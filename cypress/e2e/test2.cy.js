@@ -1,4 +1,8 @@
-/// <reference types ="cypress" />
+/*// <reference types ="cypress" />*/
+
+import { LoginPage } from "./pages/login_page";
+
+const loginPage = new LoginPage();
 
 describe("Hrm web test login and add employee", () => {
   beforeEach(function () {
@@ -6,13 +10,10 @@ describe("Hrm web test login and add employee", () => {
   });
 
   it("scenario-1", () => {
-    cy.get(
-      ":nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input"
-    ).type("Admin");
-    cy.get(
-      ":nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input"
-    ).type("admin123");
-    cy.get(".oxd-button").click();
+    loginPage.enterUsername("Admin");
+    loginPage.enterPassword("admin123");
+    loginPage.clickLogin();
+
     ///open demo web the type password and username
     cy.contains("Admin").should("be.visible").click();
     cy.contains("Add").click();
